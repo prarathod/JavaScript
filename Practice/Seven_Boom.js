@@ -29,17 +29,17 @@ towerHanoi(5) ➞ 31
 towerHanoi(0) ➞ 0
 */
 
-var towerHanoi = function(discs) {
-	let moves = 0;
-	(function play(discs) {
-		if(discs > 0) {
-			play(discs - 1);
-			moves++;
-			play(discs - 1);
-		}
-	}(discs));
-	
-	return moves;
+var towerHanoi = function (discs) {
+    let moves = 0;
+    (function play(discs) {
+        if (discs > 0) {
+            play(discs - 1);
+            moves++;
+            play(discs - 1);
+        }
+    }(discs));
+
+    return moves;
 }
 
 
@@ -70,14 +70,58 @@ Fun fact: for most probability matrices M (for example, if M has no zero entries
 function isProbMatrix(arr) {
     const isProb = arr.flat(Infinity).filter((item) => item >= 0 && item <= 1);
     const numItems = arr.flat(Infinity).length;
-  
+
     if (numItems !== isProb.length) return false;
-  
+
     if (!arr.every((row) => row.length === arr.length)) return false;
-      
-      const sumRows = arr.map(row=>row.reduce((acc,value)=>acc+value),0)
-      
-      if(!sumRows.every(rowTotal=>rowTotal === 1)) return false;
-      
+
+    const sumRows = arr.map(row => row.reduce((acc, value) => acc + value), 0)
+
+    if (!sumRows.every(rowTotal => rowTotal === 1)) return false;
+
     return true;
-  }
+}
+
+
+/*
+Catalan Number
+
+Create a function that returns the nth catalan number.In combinatorial mathematics, the Catalan numbers form a sequence of natural numbers that occur in various counting problems, often involving recursively-defined objects. They are named after the Belgian mathematician Eugène Charles Catalan (1814–1894). For more info, check out the resource tab.
+
+getCatalanNumber(0) ➞ 1
+
+getCatalanNumber(6) ➞ 132
+
+getCatalanNumber(8) ➞ 1430
+*/
+
+f = n => n > 1 ? n * f(n - 1) : n
+function getCatalanNumber(n) {
+    return n ? 1 / (n + 1) * (f(2 * n) / f(n) ** 2) : 1
+}
+
+
+/*
+Number of Boomerangs
+
+A boomerang is a V-shaped sequence that is either upright or upside down. Specifically, a boomerang can be defined as: sub-array of length 3, with the first and last digits being the same and the middle digit being different.
+
+Some boomerang examples:[3, 7, 3], [1, -1, 1], [5, 6, 5]
+
+Create a function that returns the total number of boomerangs in an array.
+To illustrate:[3, 7, 3, 2, 1, 5, 1, 2, 2, -2, 2]
+// 3 boomerangs in this sequence:  [3, 7, 3], [1, 5, 1], [2, -2, 2]
+
+Be aware that boomerangs can overlap, like so:[1, 7, 1, 7, 1, 7, 1]
+// 5 boomerangs (from left to right): [1, 7, 1], [7, 1, 7], [1, 7, 1], [7, 1, 7], and [1, 7, 1]
+
+Examples
+countBoomerangs([9, 5, 9, 5, 1, 1, 1]) ➞ 2
+
+countBoomerangs([5, 6, 6, 7, 6, 3, 9]) ➞ 1
+
+countBoomerangs([4, 4, 4, 9, 9, 9, 9]) ➞ 0
+
+Notes
+[5, 5, 5] (triple identical digits) is NOT considered a boomerang because the middle digit is identical to the first and last.
+*/
