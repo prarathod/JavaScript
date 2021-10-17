@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Store</title>
+    <style>
+        #Products{
+            display: grid;
+            grid-template-columns: repeat(4,20%);
+            margin:3%;
+            grid-gap:5%; 
+        }
+
+
+        img{
+            width: 100%;
+         
+        }
+        #h{
+            background-color: teal;
+            color: white;
+            text-shadow: rgb(82, 80, 80);
+            margin: -10px -10px 30px -10px;
+            height: 80px;
+            font-size: 80px;
+            padding: 20px;
+           
+        }
+    </style>
+</head>
+<body>
+    <div id="h">SwapGo</div>
+    <button onclick="show()">Show Products</button><button onclick="hide()">Hide Products</button>
+    <div id="Products"></div>
+    
+</body>
+
+<script>
+    // fetch("https://fakestoreapi.com/products").then((res)=>{
+    //     return res.json();
+    // })
+    // .then((res)=>{
+    //     showProduct(res)
+    // })
+    
+
+    async function show(){
+        let res = await fetch("https://fakestoreapi.com/products");
+        let data  = await res.json();
+        showProduct(data)
+    }
+ 
+let container = document.getElementById('Products')
+function hide(){
+    let a = document.getElementById('Products').style.display = 'none';
+    }
+
+    function showProduct(arr){
+        arr.forEach((product)=>{
+            console.log(product)
+            let div = document.createElement('div')
+            let img = document.createElement('img')
+            console.log(img)
+            img.src= product.image;
+            let price = document.createElement('h3')
+            price.innerText = product.price;
+            let name = document.createElement('h3')
+            name.innerText = product.title;
+            div.append(img,price,name)
+            container.append(div)
+            let a = document.getElementById('Products').style.display = 'grid';
+        })
+    }
+
+  
+</script>
+</html>
