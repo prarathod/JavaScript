@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking</title>
+</head>
+<body>
+    <h1>Tatkal Tain</h1>
+
+<button onclick="check()">Check Seats</button>
+</body>
+
+<script>
+      let MtoG = ['ram','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    let NtoG = ['ram','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    let OtoG = ['ram','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    function check(){
+
+        let myPromiss = new Promise((resove,reject)=>{
+
+            let a = setInterval(function(){
+                if(MtoG.length<=22){
+                    resove ("M to G seats available");
+                    console.log("N to G seats available");
+                    clearInterval(interval)
+                    clearInterval(a)
+            
+                }else if( NtoG.length<=22){
+                    resove ("N to G seats available");
+                    console.log("N to G seats available");
+                    clearInterval(interval)
+                    clearInterval(a)
+                  
+                }else if (OtoG.length<=22){
+                    resove ("O to G seats available");
+                    console.log("O to G seats available");
+                    clearInterval(interval)
+                    clearInterval(a)
+                
+                }
+            },1000)
+        })
+        myPromiss.then(function(res){
+            console.log(res)
+        }).catch((reject)=>{
+            console.log(reject)
+        })
+    }
+
+    function cancelTicket(){
+        
+        console.log(MtoG)
+        console.log(NtoG)
+        console.log(OtoG)
+        let cancel1 = Math.round(Math.random()*5)
+        let cancel2 = Math.round(Math.random()*5)
+        let cancel3 = Math.round(Math.random()*5)
+        
+        setTimeout(() => {
+            MtoG.shift();
+        }, cancel1*1000);
+        setTimeout(() => {
+            NtoG.shift();
+        }, cancel2*1000);
+        setTimeout(() => {
+            OtoG.shift();
+        }, cancel3*1000);
+    };
+
+    let interval = setInterval(cancelTicket , 2000);
+</script>
+</html>
